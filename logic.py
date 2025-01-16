@@ -36,11 +36,11 @@ class Pokemon:
     
     # Метод для получения имени покемона через API
     def get_name(self):
-        url = f'https://pokeapi.co/api/v2/pokemon/1/{self.pokemon_number}'
+        url = f'https://pokeapi.co/api/v2/pokemon/{self.pokemon_number}'
         response = requests.get(url)
         if response.status_code == 200:
             data = response.json()
-            return (data['sprites']['front_default'])
+            return (data['forms'][0]['name'])
         else:
             return "Pikachu"
 

@@ -17,6 +17,12 @@ def go(message):
     else:
         bot.reply_to(message, "Ты уже создал себе покемона")
 
+@bot.message_handler(commands=['info'])
+def info(message):
+    if message.from_user.username in Pokemon.pokemons.keys():
+        pok = Pokemon.pokemons[message.from_user.username]
+        
+
 @bot.message_handler(commands=['attack'])
 def pokemon_attack(message):
     if message.reply_to_message:
