@@ -17,12 +17,6 @@ def go(message):
     else:
         bot.reply_to(message, "Ты уже создал себе покемона")
 
-@bot.message_handler(commands=['info'])
-def info(message):
-    if message.from_user.username in Pokemon.pokemons.keys():
-        pok = Pokemon.pokemons[message.from_user.username]
-        
-
 @bot.message_handler(commands=['attack'])
 def pokemon_attack(message):
     if message.reply_to_message:
@@ -32,6 +26,19 @@ def pokemon_attack(message):
         bot.reply_to(message, pokemon1.attack(pokemon2))
     else:
         bot.reply_to(message, "Комманда /attack должна быть написана в ответ на сообщение")
+
+@bot.message_handler(commands=['info'])
+def info(message):
+    if message.from_user.username in Pokemon.pokemons.keys():
+        pok = Pokemon.pokemons[message.from_user.username]
+        bot.send_message(message.chat.id, pok.info())
+
+@bot.message_handler(commands=['feed'])
+def feed(message):
+    if message.from_user.username in Pokemon.pokemons.keys():
+        pok = Pokemon.pokemons[message.from_user.username]
+        bot.send_message(message.chat.id, pok.feed())
+
 
 @bot.message_handler(commands=['start'])
 def start(message):
